@@ -1,10 +1,77 @@
-2025/01/08-16:19:25.639 3564 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/08-16:19:25.639 3564 Recovering log #59
-2025/01/08-16:19:25.673 3564 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000059.log 
-2025/01/08-16:25:23.051 21a8 Level-0 table #64: started
-2025/01/08-16:25:23.198 21a8 Level-0 table #64: 1043415 bytes OK
-2025/01/08-16:25:23.204 21a8 Delete type=0 #59
-2025/01/08-16:25:23.253 21a8 Compacting 1@1 + 1@2 files
-2025/01/08-16:25:23.297 21a8 Generated table #65@1: 1839 keys, 224519 bytes
-2025/01/08-16:25:23.297 21a8 Compacted 1@1 + 1@2 files => 224519 bytes
-2025/01/08-16:25:23.298 21a8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-16:36:33.891 5fc Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/08-16:36:33.903 5fc Recovering log #63
+2025/01/08-16:36:33.987 5fc Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000063.log 
+2025/01/08-16:36:33.988 5fc Delete type=2 #61
+2025/01/08-16:36:33.988 5fc Delete type=2 #64
+2025/01/08-16:36:54.039 5fc Level-0 table #68: started
+2025/01/08-16:36:54.087 5fc Level-0 table #68: 1044030 bytes OK
+2025/01/08-16:36:54.092 5fc Delete type=0 #63
+2025/01/08-16:36:54.267 d70 Compacting 1@1 + 1@2 files
+2025/01/08-16:36:54.301 d70 Generated table #69@1: 1962 keys, 240744 bytes
+2025/01/08-16:36:54.301 d70 Compacted 1@1 + 1@2 files => 240744 bytes
+2025/01/08-16:36:54.302 d70 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-16:36:54.303 d70 Delete type=2 #65
+2025/01/08-16:36:54.303 d70 Delete type=2 #68
+2025/01/08-17:03:16.368 d70 Level-0 table #71: started
+2025/01/08-17:03:16.418 d70 Level-0 table #71: 1033679 bytes OK
+2025/01/08-17:03:16.420 d70 Delete type=0 #67
+2025/01/08-17:03:16.494 d70 Compacting 1@1 + 1@2 files
+2025/01/08-17:03:16.535 d70 Generated table #72@1: 2376 keys, 303843 bytes
+2025/01/08-17:03:16.535 d70 Compacted 1@1 + 1@2 files => 303843 bytes
+2025/01/08-17:03:16.536 d70 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:03:16.536 d70 Delete type=2 #69
+2025/01/08-17:03:16.536 d70 Delete type=2 #71
+2025/01/08-17:06:26.551 d70 Level-0 table #74: started
+2025/01/08-17:06:26.616 d70 Level-0 table #74: 1047376 bytes OK
+2025/01/08-17:06:26.618 d70 Delete type=0 #70
+2025/01/08-17:06:29.674 d70 Compacting 1@1 + 1@2 files
+2025/01/08-17:06:29.716 d70 Generated table #75@1: 2492 keys, 326625 bytes
+2025/01/08-17:06:29.716 d70 Compacted 1@1 + 1@2 files => 326625 bytes
+2025/01/08-17:06:29.717 d70 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:06:29.718 d70 Delete type=2 #72
+2025/01/08-17:06:29.718 d70 Delete type=2 #74
+2025/01/08-17:07:54.030 d70 Level-0 table #77: started
+2025/01/08-17:07:54.078 d70 Level-0 table #77: 1040541 bytes OK
+2025/01/08-17:07:54.084 d70 Delete type=0 #73
+2025/01/08-17:07:54.460 5fc Compacting 1@1 + 1@2 files
+2025/01/08-17:07:54.547 5fc Generated table #78@1: 2551 keys, 331361 bytes
+2025/01/08-17:07:54.547 5fc Compacted 1@1 + 1@2 files => 331361 bytes
+2025/01/08-17:07:54.548 5fc compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:07:54.548 5fc Delete type=2 #75
+2025/01/08-17:07:54.548 5fc Delete type=2 #77
+2025/01/08-17:09:23.401 d70 Level-0 table #80: started
+2025/01/08-17:09:23.441 d70 Level-0 table #80: 1035123 bytes OK
+2025/01/08-17:09:23.444 d70 Delete type=0 #76
+2025/01/08-17:09:23.734 d70 Compacting 1@1 + 1@2 files
+2025/01/08-17:09:23.836 d70 Generated table #81@1: 2603 keys, 335846 bytes
+2025/01/08-17:09:23.836 d70 Compacted 1@1 + 1@2 files => 335846 bytes
+2025/01/08-17:09:23.838 d70 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:09:23.839 d70 Delete type=2 #78
+2025/01/08-17:09:23.839 d70 Delete type=2 #80
+2025/01/08-17:12:39.278 d70 Level-0 table #83: started
+2025/01/08-17:12:39.364 d70 Level-0 table #83: 1053371 bytes OK
+2025/01/08-17:12:39.368 d70 Delete type=0 #79
+2025/01/08-17:12:43.902 5fc Compacting 1@1 + 1@2 files
+2025/01/08-17:12:43.931 5fc Generated table #84@1: 2668 keys, 344136 bytes
+2025/01/08-17:12:43.931 5fc Compacted 1@1 + 1@2 files => 344136 bytes
+2025/01/08-17:12:43.932 5fc compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:13:59.530 d70 Level-0 table #86: started
+2025/01/08-17:13:59.569 d70 Level-0 table #86: 1041924 bytes OK
+2025/01/08-17:13:59.571 d70 Delete type=2 #81
+2025/01/08-17:13:59.571 d70 Delete type=0 #82
+2025/01/08-17:13:59.571 d70 Delete type=2 #83
+2025/01/08-17:13:59.611 5fc Compacting 1@1 + 1@2 files
+2025/01/08-17:13:59.652 5fc Generated table #87@1: 2725 keys, 349282 bytes
+2025/01/08-17:13:59.652 5fc Compacted 1@1 + 1@2 files => 349282 bytes
+2025/01/08-17:13:59.654 5fc compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:13:59.655 5fc Delete type=2 #84
+2025/01/08-17:13:59.655 5fc Delete type=2 #86
+2025/01/08-17:15:19.522 d70 Level-0 table #89: started
+2025/01/08-17:15:19.555 d70 Level-0 table #89: 1038351 bytes OK
+2025/01/08-17:15:19.559 d70 Delete type=0 #85
+2025/01/08-17:15:19.581 d70 Compacting 1@1 + 1@2 files
+2025/01/08-17:15:19.623 d70 Generated table #90@1: 2775 keys, 346765 bytes
+2025/01/08-17:15:19.623 d70 Compacted 1@1 + 1@2 files => 346765 bytes
+2025/01/08-17:15:19.627 d70 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-17:15:19.627 d70 Delete type=2 #87
+2025/01/08-17:15:19.627 d70 Delete type=2 #89

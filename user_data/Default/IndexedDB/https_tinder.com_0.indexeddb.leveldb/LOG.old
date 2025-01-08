@@ -1,3 +1,10 @@
-2025/01/08-15:58:49.679 3960 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/08-15:58:49.679 3960 Recovering log #59
-2025/01/08-15:58:49.689 3960 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000059.log 
+2025/01/08-16:19:25.639 3564 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/08-16:19:25.639 3564 Recovering log #59
+2025/01/08-16:19:25.673 3564 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000059.log 
+2025/01/08-16:25:23.051 21a8 Level-0 table #64: started
+2025/01/08-16:25:23.198 21a8 Level-0 table #64: 1043415 bytes OK
+2025/01/08-16:25:23.204 21a8 Delete type=0 #59
+2025/01/08-16:25:23.253 21a8 Compacting 1@1 + 1@2 files
+2025/01/08-16:25:23.297 21a8 Generated table #65@1: 1839 keys, 224519 bytes
+2025/01/08-16:25:23.297 21a8 Compacted 1@1 + 1@2 files => 224519 bytes
+2025/01/08-16:25:23.298 21a8 compacted to: files[ 0 0 1 0 0 0 0 ]
