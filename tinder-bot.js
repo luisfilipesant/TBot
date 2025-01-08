@@ -36,6 +36,7 @@ const __dirname = path.dirname(__filename);
     await new Promise(resolve => setTimeout(resolve, 5000)); // Espera 5 segundos
 
     let autoSwipe = false; // Auto-Swipe desativado por padrão
+    let botRunning = true; // Bot começa rodando por padrão
 
     // Array de mensagens iniciais
     const initialGreetings = [
@@ -59,9 +60,15 @@ const __dirname = path.dirname(__filename);
         "Oi, tudo bem? Curti seu estilo, vamos trocar umas ideias?"
     ];
 
+    // Função para esperar a página carregar
+    const waitForPageLoad = async (page, url, delay = 4000) => {
+        await page.goto(url);
+        await new Promise(resolve => setTimeout(resolve, delay));
+    };
+
     // Função principal de verificação de mensagens
     const checkForNewMessages = async () => {
-        while (true) {
+        while (botRunning) {
             if (autoSwipe) {
                 console.log('🔄 Modo Auto-Swipe ativado. Curtindo perfis...');
                 await swipeProfiles(page);
@@ -72,10 +79,10 @@ const __dirname = path.dirname(__filename);
 
             console.log('⏳ Aguardando 2 minutos para checar novamente...');
             for (let i = 0; i < 120; i++) {
+                if (!botRunning) return; // Interrompe imediatamente se o bot foi parado
                 if (!autoSwipe && i === 105) {
                     console.log('⏳ Voltando para a página de mensagens...');
-                    await page.goto('https://tinder.com/app/matches');
-                    await new Promise(resolve => setTimeout(resolve, 5000));
+                    await waitForPageLoad(page, 'https://tinder.com/app/matches');
                 }
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
@@ -84,12 +91,10 @@ const __dirname = path.dirname(__filename);
 
     // Função de curtir perfis
     const swipeProfiles = async (page) => {
-        await page.goto('https://tinder.com/app/recs');
-        await new Promise(resolve => setTimeout(resolve, 4000)); // Espera 4 segundos para a página carregar
-
-        while (autoSwipe) {
+        await waitForPageLoad(page, 'https://tinder.com/app/recs');
+        while (autoSwipe && botRunning) {
             try {
-                // Usa o seletor fornecido para encontrar o botão de curtir
+                // Usa o seletor específico que funciona
                 const likeButton = await page.$('#q2098069830 > div > div.App__body.H\\(100\\%\\).Pos\\(r\\).Z\\(0\\) > div > div > div > main > div > div > div > div > div.Pos\\(a\\).B\\(0\\).Iso\\(i\\).W\\(100\\%\\).Start\\(0\\).End\\(0\\).TranslateY\\(55\\%\\) > div > div:nth-child(4) > button');
                 if (likeButton) {
                     await likeButton.click();
@@ -98,7 +103,6 @@ const __dirname = path.dirname(__filename);
                     console.log('⚠️ Botão de curtir não encontrado.');
                     break;
                 }
-
                 await new Promise(resolve => setTimeout(resolve, 4000)); // Pausa de 4 segundos entre likes
             } catch (err) {
                 console.log('⚠️ Não há mais perfis para curtir ou ocorreu um erro.');
@@ -117,6 +121,8 @@ const __dirname = path.dirname(__filename);
         console.log(`📩 Chats encontrados: ${chatLinks.length}`);
 
         for (const chatLink of chatLinks) {
+            if (!botRunning) return; // Interrompe imediatamente se o bot foi parado
+
             console.log(`➡️ Abrindo chat: ${chatLink}`);
             await page.goto(chatLink);
             await new Promise(resolve => setTimeout(resolve, 6000));
@@ -194,9 +200,20 @@ const __dirname = path.dirname(__filename);
 
     // Listener para alternar entre modos
     process.stdin.on('data', (key) => {
-        if (key.toString().trim() === 'AA') {
+        const input = key.toString().trim().toUpperCase();
+
+        if (input === 'AA') {
             autoSwipe = !autoSwipe;
             console.log(`🔄 Modo Auto-Swipe ${autoSwipe ? 'ativado' : 'desativado'}.`);
+        } else if (input === 'STOP') {
+            botRunning = false;
+            console.log('🛑 Bot parado.');
+        } else if (input === 'START') {
+            if (!botRunning) {
+                botRunning = true;
+                console.log('✅ Bot iniciado.');
+                checkForNewMessages();
+            }
         }
     });
 
