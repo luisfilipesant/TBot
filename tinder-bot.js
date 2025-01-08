@@ -2,10 +2,9 @@ import puppeteer from 'puppeteer';
 import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import db from './database.js'; // Se seu database.js também for ESM. 
-                               // Se não, ver abaixo**
+import db from './database.js';
 
-// Para recriar __dirname no ESM
+// Recria __dirname para ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,7 +14,6 @@ const __dirname = path.dirname(__filename);
         userDataDir: path.join(__dirname, 'user_data'),
     };
 
-    // Inicia o Puppeteer
     const browser = await puppeteer.launch(browserOptions);
     const pages = await browser.pages();
     const page = pages[0] || await browser.newPage();
@@ -23,7 +21,7 @@ const __dirname = path.dirname(__filename);
     // Acessa Tinder
     await page.goto('https://tinder.com');
 
-    // Verifica se já está logado
+    // Verifica se está logado
     try {
         await page.waitForSelector('a[href="/app/recs"]', { timeout: 10000 });
         console.log('✅ Sessão ativa. Pronto para continuar!');
@@ -35,8 +33,11 @@ const __dirname = path.dirname(__filename);
     // Vai para a página de matches
     console.log('➡️ Redirecionando para a página de matches...');
     await page.goto('https://tinder.com/app/matches');
+    await new Promise(resolve => setTimeout(resolve, 5000)); // Espera 5 segundos
 
-    // Array de mensagens iniciais (18 variações):
+    let autoSwipe = true; // Auto-Swipe ativado por padrão
+
+    // Array de mensagens iniciais
     const initialGreetings = [
         "Oi, tudo bem? Achei seu perfil encantador!",
         "E aí, tudo bom? Vi seu perfil e me interessei bastante.",
@@ -58,163 +59,140 @@ const __dirname = path.dirname(__filename);
         "Oi, tudo bem? Curti seu estilo, vamos trocar umas ideias?"
     ];
 
-    // Função que verifica mensagens não respondidas continuamente
+    // Função principal de verificação de mensagens
     const checkForNewMessages = async () => {
         while (true) {
-            // Coleta links de chats
-            const chatLinks = await page.evaluate(() => {
-                return Array.from(document.querySelectorAll('a[href*="/app/messages/"]'))
-                    .map(link => link.href);
-            });
-
-            console.log(`📩 Chats encontrados: ${chatLinks.length}`);
-
-            for (const chatLink of chatLinks) {
-                console.log(`➡️ Abrindo chat: ${chatLink}`);
-                await page.goto(chatLink);
-
-                // Espera até 6s para carregar
-                await new Promise(resolve => setTimeout(resolve, 6000));
-
-                // Coleta todas as mensagens
-                const messagesAll = await page.evaluate(() => {
-                    const msgEls = Array.from(document.querySelectorAll('.msg'));
-                    return msgEls.map(el => {
-                        const content = el.innerText.trim();
-                        const isReceived = el.classList.contains('msg--received');
-                        return { content, isReceived };
-                    });
-                });
-
-                // Se não houver mensagens, manda mensagem inicial
-                if (messagesAll.length === 0) {
-                    console.log('⚠️ Chat vazio. Iniciando conversa...');
-
-                    // Saudação aleatória
-                    const randomIndex = Math.floor(Math.random() * initialGreetings.length);
-                    const initMsg = initialGreetings[randomIndex];
-
-                    try {
-                        await page.waitForSelector('textarea', { timeout: 5000 });
-                        await page.type('textarea', initMsg);
-                        await page.keyboard.press('Enter');
-                        console.log(`✅ Mensagem inicial enviada: ${initMsg}`);
-                    } catch (err) {
-                        console.log('❌ Não foi possível encontrar o textarea. Pulando este chat.');
-                    }
-                    continue;
-                }
-
-                // Verifica a última mensagem (se foi recebida ou enviada)
-                const lastMessage = messagesAll[messagesAll.length - 1];
-                if (!lastMessage.isReceived) {
-                    console.log('🟢 Última mensagem foi sua (ou do bot). Pulando o chat.');
-                    continue;
-                }
-
-                console.log(`✉️ Última mensagem recebida: ${lastMessage.content}`);
-
-                // Verifica se já respondemos essa mensagem
-                const isAlreadyResponded = await new Promise((resolve, reject) => {
-                    db.get(
-                        'SELECT * FROM messages WHERE message = ?',
-                        [lastMessage.content],
-                        (err, row) => {
-                            if (err) reject(err);
-                            resolve(!!row);
-                        }
-                    );
-                });
-
-                if (isAlreadyResponded) {
-                    console.log('🟢 Mensagem já respondida anteriormente. Pulando o chat.');
-                    continue;
-                }
-
-                // Pega as últimas 8 mensagens
-                const lastEight = messagesAll.slice(-8);
-
-                // Monta o array de messages
-                const promptMessages = lastEight.map(msg => ({
-                    author: msg.isReceived ? "user" : "bot",
-                    content: msg.content,
-                }));
-
-                // Monta o corpo do /respond
-                const promptPayload = {
-                    prompt: {
-                        context: `
-                            Você se chama Bruno, um homem de 30 anos,
-                            mora no Prado (Belo Horizonte),
-                            trabalha como contador,
-                            é bem-humorado, romântico e mora sozinho.
-                            evite perguntar "oi tudo bem?" ou "como você está?"
-
-                            Gosta de vários estilos musicais, mas não de funk.
-                            Adora viajar, principalmente para o Nordeste.
-
-                            Sempre se refira a si mesmo no masculino.
-                            Trate a outra pessoa (a usuária) sempre no feminino.
-
-                            Faça respostas curtas e naturais, sem falar demais.
-                            Busque ser humano e autêntico, com viés de flerte.
-                            Se não souber o que responder, invente algo para conquistá-la
-                            de maneira agradável e respeitosa.
-
-                            evite usar emojis demais, use em situações muito específicas.
-                            evite pedir o número de telefone ou marcar encontros.
-                            evite falar que eu moro no prado ou em BH ou em Minas.
-                            se a pessoa falar que é do RS ou qualquer cidade de lá, fale que eu sou de lá também.
-                            tente sempre que a pessoa fale onde ela mora primeiro, para descobrir se é de BH ou não.
-                            se a pessoa falar que é de BH, fale que eu sou de lá também, no Prado e etc.
-                            meu instagram é: brunodiegolins.
-                            tente render as conversas, mas sem perguntar o tempo todo.
-                            Considere cuidadosamente todo o histórico de mensagens (onde author: 'bot' é você e author: 'user' é ela) para dar uma resposta coerente e consistente com o que foi dito anteriormente.
-                            analise as mensagens anteriores para entender o contexto e responder de forma coerente.
-                        `,
-                        messages: promptMessages
-                    }
-                };
-
-                try {
-                    // Chama o servidor local (server.js) que fala com a IA
-                    const response = await axios.post(
-                        'http://localhost:3000/respond',
-                        promptPayload,
-                        { headers: { 'Content-Type': 'application/json' } }
-                    );
-
-                    const reply = response.data.reply;
-                    console.log(`💬 Resposta gerada: ${reply}`);
-
-                    // Tenta encontrar o textarea e digitar a resposta
-                    try {
-                        await page.waitForSelector('textarea', { timeout: 5000 });
-                        await page.type('textarea', reply);
-                        await page.keyboard.press('Enter');
-                        console.log('✅ Resposta enviada.');
-                    } catch (err) {
-                        console.log('❌ Não foi possível encontrar o textarea ao responder. Pulando este chat.');
-                        continue;
-                    }
-
-                    // Salva no DB local que esta mensagem foi respondida
-                    db.run('INSERT INTO messages (message) VALUES (?)', [lastMessage.content]);
-
-                } catch (error) {
-                    console.error('❌ Erro ao conectar com a API:', error);
-                }
+            if (autoSwipe) {
+                console.log('🔄 Modo Auto-Swipe ativado. Curtindo perfis...');
+                await swipeProfiles(page);
+            } else {
+                console.log('📩 Verificando novas mensagens...');
+                await checkMessages(page);
             }
 
-            // Ao finalizar todos os chats, aguarda 5 min e recomeça
-            console.log('⏳ Nenhuma nova mensagem (ou todas respondidas). Aguardando 5 minutos...');
-            await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
+            console.log('⏳ Aguardando 2 minutos para checar novamente...');
+            for (let i = 0; i < 120; i++) { // Espera 2 minutos
+                if (!autoSwipe && i === 105) {
+                    console.log('⏳ Voltando para a página de mensagens...');
+                    await page.goto('https://tinder.com/app/matches');
+                    await new Promise(resolve => setTimeout(resolve, 5000)); // Espera 5 segundos
+                }
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
         }
     };
 
+    // Função de curtir perfis
+    const swipeProfiles = async (page) => {
+        await page.goto('https://tinder.com/app/recs');
+        while (autoSwipe) {
+            try {
+                await page.waitForSelector('.gamepad-button-wrapper button', { timeout: 5000 });
+                await page.click('.gamepad-button-wrapper button');
+                console.log('💚 Perfil curtido!');
+                await new Promise(resolve => setTimeout(resolve, 4000)); // Pausa de 4 segundos entre likes
+            } catch (err) {
+                console.log('⚠️ Não há mais perfis para curtir ou ocorreu um erro.');
+                break;
+            }
+        }
+    };
+
+    // Função de verificação de mensagens
+    const checkMessages = async (page) => {
+        const chatLinks = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll('a[href*="/app/messages/"]'))
+                .map(link => link.href);
+        });
+
+        console.log(`📩 Chats encontrados: ${chatLinks.length}`);
+
+        for (const chatLink of chatLinks) {
+            console.log(`➡️ Abrindo chat: ${chatLink}`);
+            await page.goto(chatLink);
+            await new Promise(resolve => setTimeout(resolve, 6000)); // Espera 6 segundos
+
+            const messagesAll = await page.evaluate(() => {
+                const msgEls = Array.from(document.querySelectorAll('.msg'));
+                return msgEls.map(el => {
+                    const content = el.innerText.trim();
+                    const isReceived = el.classList.contains('msg--received');
+                    return { content, isReceived };
+                });
+            });
+
+            if (messagesAll.length === 0) {
+                console.log('⚠️ Chat vazio. Iniciando conversa...');
+                const randomIndex = Math.floor(Math.random() * initialGreetings.length);
+                const initMsg = initialGreetings[randomIndex];
+                await page.type('textarea', initMsg);
+                await page.keyboard.press('Enter');
+                console.log(`✅ Mensagem inicial enviada: ${initMsg}`);
+                continue;
+            }
+
+            const lastMessage = messagesAll[messagesAll.length - 1];
+            if (!lastMessage.isReceived) {
+                console.log('🟢 Última mensagem foi sua (ou do bot). Pulando o chat.');
+                continue;
+            }
+
+            console.log(`✉️ Última mensagem recebida: ${lastMessage.content}`);
+
+            const isAlreadyResponded = await new Promise((resolve, reject) => {
+                db.get(
+                    'SELECT * FROM messages WHERE message = ?',
+                    [lastMessage.content],
+                    (err, row) => {
+                        if (err) reject(err);
+                        resolve(!!row);
+                    }
+                );
+            });
+
+            if (isAlreadyResponded) {
+                console.log('🟢 Mensagem já respondida anteriormente. Pulando o chat.');
+                continue;
+            }
+
+            const lastEight = messagesAll.slice(-8);
+            const promptMessages = lastEight.map(msg => ({
+                author: msg.isReceived ? "user" : "bot",
+                content: msg.content,
+            }));
+
+            const promptPayload = {
+                prompt: {
+                    context: 'Você se chama Bruno, um homem de 30 anos, etc...',
+                    messages: promptMessages
+                }
+            };
+
+            try {
+                const response = await axios.post('http://localhost:3000/respond', promptPayload, { headers: { 'Content-Type': 'application/json' } });
+                const reply = response.data.reply;
+                console.log(`💬 Resposta gerada: ${reply}`);
+                await page.type('textarea', reply);
+                await page.keyboard.press('Enter');
+                console.log('✅ Resposta enviada.');
+
+                db.run('INSERT INTO messages (message) VALUES (?)', [lastMessage.content]);
+            } catch (error) {
+                console.error('❌ Erro ao conectar com a API:', error);
+            }
+        }
+    };
+
+    // Listener para alternar entre modos
+    process.stdin.on('data', (key) => {
+        if (key.toString().trim() === 'AA') {
+            autoSwipe = !autoSwipe;
+            console.log(`🔄 Modo Auto-Swipe ${autoSwipe ? 'ativado' : 'desativado'}.`);
+        }
+    });
+
     await checkForNewMessages();
 
-    // Se der CTRL+C, deixa o navegador aberto
     process.on('SIGINT', async () => {
         console.log('🛑 Bot interrompido. O navegador permanecerá aberto.');
         await browser.disconnect();
