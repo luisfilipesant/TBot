@@ -35,7 +35,7 @@ const __dirname = path.dirname(__filename);
     await page.goto('https://tinder.com/app/matches');
     await new Promise(resolve => setTimeout(resolve, 5000)); // Espera 5 segundos
 
-    let autoSwipe = true; // Auto-Swipe ativado por padrão
+    let autoSwipe = false; // Auto-Swipe desativado por padrão
 
     // Array de mensagens iniciais
     const initialGreetings = [
@@ -89,18 +89,11 @@ const __dirname = path.dirname(__filename);
 
         while (autoSwipe) {
             try {
-                // Simula o movimento do mouse antes do clique
-                const likeButton = await page.$('.gamepad-button-wrapper button');
+                // Usa o seletor fornecido para encontrar o botão de curtir
+                const likeButton = await page.$('#q2098069830 > div > div.App__body.H\\(100\\%\\).Pos\\(r\\).Z\\(0\\) > div > div > div > main > div > div > div > div > div.Pos\\(a\\).B\\(0\\).Iso\\(i\\).W\\(100\\%\\).Start\\(0\\).End\\(0\\).TranslateY\\(55\\%\\) > div > div:nth-child(4) > button');
                 if (likeButton) {
-                    const boundingBox = await likeButton.boundingBox();
-                    if (boundingBox) {
-                        await page.mouse.move(
-                            boundingBox.x + boundingBox.width / 2,
-                            boundingBox.y + boundingBox.height / 2
-                        );
-                        await likeButton.click();
-                        console.log('💚 Perfil curtido!');
-                    }
+                    await likeButton.click();
+                    console.log('💚 Perfil curtido!');
                 } else {
                     console.log('⚠️ Botão de curtir não encontrado.');
                     break;

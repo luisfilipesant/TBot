@@ -1,14 +1,3 @@
-2025/01/08-15:00:16.141 42d8 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/MANIFEST-000001
-2025/01/08-15:00:16.147 42d8 Recovering log #8
-2025/01/08-15:00:16.157 42d8 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/000008.log 
-2025/01/08-15:05:16.362 42d8 Level-0 table #12: started
-2025/01/08-15:05:16.374 42d8 Level-0 table #12: 29964 bytes OK
-2025/01/08-15:05:16.381 42d8 Delete type=0 #8
-2025/01/08-15:05:16.382 42d8 Compacting 4@0 + 0@1 files
-2025/01/08-15:05:16.392 42d8 Generated table #13@0: 10 keys, 4613 bytes
-2025/01/08-15:05:16.392 42d8 Compacted 4@0 + 0@1 files => 4613 bytes
-2025/01/08-15:05:16.397 42d8 compacted to: files[ 0 1 0 0 0 0 0 ]
-2025/01/08-15:05:16.399 42d8 Delete type=2 #3
-2025/01/08-15:05:16.399 42d8 Delete type=2 #6
-2025/01/08-15:05:16.399 42d8 Delete type=2 #9
-2025/01/08-15:05:16.399 42d8 Delete type=2 #12
+2025/01/08-15:38:37.262 29ec Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/MANIFEST-000001
+2025/01/08-15:38:37.264 29ec Recovering log #17
+2025/01/08-15:38:37.269 29ec Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/000017.log 

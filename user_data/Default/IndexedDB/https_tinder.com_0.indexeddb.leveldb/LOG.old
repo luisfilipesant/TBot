@@ -1,10 +1,12 @@
-2025/01/08-14:55:58.195 4024 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/08-14:55:58.196 4024 Recovering log #18
-2025/01/08-14:55:58.233 4024 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000018.log 
-2025/01/08-14:56:10.276 35ac Level-0 table #23: started
-2025/01/08-14:56:10.434 35ac Level-0 table #23: 1029417 bytes OK
-2025/01/08-14:56:10.437 35ac Delete type=0 #18
-2025/01/08-14:56:10.441 35ac Compacting 1@1 + 1@2 files
-2025/01/08-14:56:10.467 35ac Generated table #24@1: 930 keys, 122438 bytes
-2025/01/08-14:56:10.467 35ac Compacted 1@1 + 1@2 files => 122438 bytes
-2025/01/08-14:56:10.468 35ac compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-15:36:42.385 2e3c Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/08-15:36:42.386 2e3c Recovering log #51
+2025/01/08-15:36:42.410 2e3c Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000051.log 
+2025/01/08-15:37:34.750 2e5c Level-0 table #56: started
+2025/01/08-15:37:34.783 2e5c Level-0 table #56: 1041370 bytes OK
+2025/01/08-15:37:34.788 2e5c Delete type=0 #51
+2025/01/08-15:37:35.514 2e5c Compacting 1@1 + 1@2 files
+2025/01/08-15:37:35.552 2e5c Generated table #57@1: 1563 keys, 197777 bytes
+2025/01/08-15:37:35.552 2e5c Compacted 1@1 + 1@2 files => 197777 bytes
+2025/01/08-15:37:35.554 2e5c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-15:37:35.555 2e5c Delete type=2 #53
+2025/01/08-15:37:35.555 2e5c Delete type=2 #56
