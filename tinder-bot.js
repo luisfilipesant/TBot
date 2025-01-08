@@ -71,11 +71,11 @@ const __dirname = path.dirname(__filename);
             }
 
             console.log('⏳ Aguardando 2 minutos para checar novamente...');
-            for (let i = 0; i < 120; i++) { // Espera 2 minutos
+            for (let i = 0; i < 120; i++) {
                 if (!autoSwipe && i === 105) {
                     console.log('⏳ Voltando para a página de mensagens...');
                     await page.goto('https://tinder.com/app/matches');
-                    await new Promise(resolve => setTimeout(resolve, 5000)); // Espera 5 segundos
+                    await new Promise(resolve => setTimeout(resolve, 5000));
                 }
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
@@ -85,11 +85,27 @@ const __dirname = path.dirname(__filename);
     // Função de curtir perfis
     const swipeProfiles = async (page) => {
         await page.goto('https://tinder.com/app/recs');
+        await new Promise(resolve => setTimeout(resolve, 4000)); // Espera 4 segundos para a página carregar
+
         while (autoSwipe) {
             try {
-                await page.waitForSelector('.gamepad-button-wrapper button', { timeout: 5000 });
-                await page.click('.gamepad-button-wrapper button');
-                console.log('💚 Perfil curtido!');
+                // Simula o movimento do mouse antes do clique
+                const likeButton = await page.$('.gamepad-button-wrapper button');
+                if (likeButton) {
+                    const boundingBox = await likeButton.boundingBox();
+                    if (boundingBox) {
+                        await page.mouse.move(
+                            boundingBox.x + boundingBox.width / 2,
+                            boundingBox.y + boundingBox.height / 2
+                        );
+                        await likeButton.click();
+                        console.log('💚 Perfil curtido!');
+                    }
+                } else {
+                    console.log('⚠️ Botão de curtir não encontrado.');
+                    break;
+                }
+
                 await new Promise(resolve => setTimeout(resolve, 4000)); // Pausa de 4 segundos entre likes
             } catch (err) {
                 console.log('⚠️ Não há mais perfis para curtir ou ocorreu um erro.');
@@ -110,7 +126,7 @@ const __dirname = path.dirname(__filename);
         for (const chatLink of chatLinks) {
             console.log(`➡️ Abrindo chat: ${chatLink}`);
             await page.goto(chatLink);
-            await new Promise(resolve => setTimeout(resolve, 6000)); // Espera 6 segundos
+            await new Promise(resolve => setTimeout(resolve, 6000));
 
             const messagesAll = await page.evaluate(() => {
                 const msgEls = Array.from(document.querySelectorAll('.msg'));

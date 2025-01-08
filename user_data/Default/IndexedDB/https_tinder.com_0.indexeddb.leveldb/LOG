@@ -1,3 +1,32 @@
-2025/01/08-14:38:47.415 3c9c Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/08-14:38:47.416 3c9c Recovering log #18
-2025/01/08-14:38:47.437 3c9c Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000018.log 
+2025/01/08-15:00:17.588 371c Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/08-15:00:17.589 371c Recovering log #22
+2025/01/08-15:00:17.590 371c Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\IndexedDB\https_tinder.com_0.indexeddb.leveldb/000022.log 
+2025/01/08-15:00:17.591 371c Delete type=2 #20
+2025/01/08-15:00:17.592 371c Delete type=2 #23
+2025/01/08-15:04:07.064 372c Level-0 table #27: started
+2025/01/08-15:04:07.101 372c Level-0 table #27: 1045264 bytes OK
+2025/01/08-15:04:07.104 372c Delete type=0 #22
+2025/01/08-15:04:07.598 371c Compacting 1@1 + 1@2 files
+2025/01/08-15:04:07.628 371c Generated table #28@1: 1051 keys, 145427 bytes
+2025/01/08-15:04:07.631 371c Compacted 1@1 + 1@2 files => 145427 bytes
+2025/01/08-15:04:07.633 371c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-15:04:07.633 371c Delete type=2 #24
+2025/01/08-15:04:07.633 371c Delete type=2 #27
+2025/01/08-15:05:32.842 372c Level-0 table #30: started
+2025/01/08-15:05:32.880 372c Level-0 table #30: 1025008 bytes OK
+2025/01/08-15:05:32.881 372c Delete type=0 #26
+2025/01/08-15:05:33.432 371c Compacting 1@1 + 1@2 files
+2025/01/08-15:05:33.461 371c Generated table #31@1: 1104 keys, 150273 bytes
+2025/01/08-15:05:33.461 371c Compacted 1@1 + 1@2 files => 150273 bytes
+2025/01/08-15:05:33.464 371c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-15:05:33.464 371c Delete type=2 #28
+2025/01/08-15:05:33.464 371c Delete type=2 #30
+2025/01/08-15:06:59.352 372c Level-0 table #33: started
+2025/01/08-15:06:59.397 372c Level-0 table #33: 1023289 bytes OK
+2025/01/08-15:06:59.398 372c Delete type=0 #29
+2025/01/08-15:06:59.810 372c Compacting 1@1 + 1@2 files
+2025/01/08-15:06:59.842 372c Generated table #34@1: 1155 keys, 147559 bytes
+2025/01/08-15:06:59.842 372c Compacted 1@1 + 1@2 files => 147559 bytes
+2025/01/08-15:06:59.861 372c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/08-15:06:59.862 372c Delete type=2 #31
+2025/01/08-15:06:59.862 372c Delete type=2 #33
