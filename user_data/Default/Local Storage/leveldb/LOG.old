@@ -1,15 +1,2 @@
-2025/01/08-16:19:23.259 2788 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/MANIFEST-000001
-2025/01/08-16:19:23.261 2788 Recovering log #21
-2025/01/08-16:19:23.276 2788 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/000021.log 
-2025/01/08-16:27:16.368 2788 Level-0 table #24: started
-2025/01/08-16:27:16.387 2788 Level-0 table #24: 29845 bytes OK
-2025/01/08-16:27:16.389 2788 Delete type=0 #21
-2025/01/08-16:27:16.406 2788 Compacting 4@0 + 1@1 files
-2025/01/08-16:27:16.416 2788 Generated table #25@0: 11 keys, 4946 bytes
-2025/01/08-16:27:16.416 2788 Compacted 4@0 + 1@1 files => 4946 bytes
-2025/01/08-16:27:16.418 2788 compacted to: files[ 0 1 0 0 0 0 0 ]
-2025/01/08-16:27:16.420 2788 Delete type=2 #13
-2025/01/08-16:27:16.420 2788 Delete type=2 #16
-2025/01/08-16:27:16.420 2788 Delete type=2 #18
-2025/01/08-16:27:16.420 2788 Delete type=2 #20
-2025/01/08-16:27:16.420 2788 Delete type=2 #24
+2025/01/10-09:55:13.887 3b58 Creating DB C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb since it was missing.
+2025/01/10-09:55:14.041 3b58 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Local Storage\leveldb/MANIFEST-000001

@@ -1,3 +1,2 @@
-2025/01/08-16:19:23.672 21a8 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\shared_proto_db/MANIFEST-000001
-2025/01/08-16:19:23.672 21a8 Recovering log #3
-2025/01/08-16:19:23.674 21a8 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\shared_proto_db/000003.log 
+2025/01/10-09:55:14.017 bf4 Creating DB C:\Users\Jennifer\Desktop\botT\user_data\Default\shared_proto_db since it was missing.
+2025/01/10-09:55:14.031 bf4 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\shared_proto_db/MANIFEST-000001

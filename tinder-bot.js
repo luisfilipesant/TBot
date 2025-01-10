@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 (async () => {
     const browserOptions = {
         headless: false,
+        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // Caminho do Chrome instalado localmente
         userDataDir: path.join(__dirname, 'user_data'),
     };
 
@@ -23,7 +24,7 @@ const __dirname = path.dirname(__filename);
 
     // Verifica se está logado
     try {
-        await page.waitForSelector('a[href="/app/recs"]', { timeout: 10000 });
+        await page.waitForSelector('a[href="/app/recs"]', { timeout: 100000 });
         console.log('✅ Sessão ativa. Pronto para continuar!');
     } catch (err) {
         console.log('🔐 Sessão não ativa. Faça login manualmente.');
@@ -48,7 +49,6 @@ const __dirname = path.dirname(__filename);
         "Oi, linda! Tudo certinho por aí? Adoro gente que topa um bom papo.",
         "Oi, tudo bem? Gosto de gente bem-humorada, você parece ser!",
         "Oi! Tudo legal? Achei seu estilo super bacana.",
-        "Olá, tudo bem? Sou Bruno e achei interessante te conhecer.",
         "Oi, tudo bem? Me animei vendo seu perfil, topa conversar?",
         "Oi, tudo certo? Estou curioso para saber mais sobre você!",
         "Olá, tudo bem? Me impressionei com seu perfil.",
@@ -57,7 +57,8 @@ const __dirname = path.dirname(__filename);
         "Olá! Como anda esse dia? Tenho a sensação de que podemos nos dar bem.",
         "Oi, tudo bem? Fiquei bem interessado na sua vibe.",
         "E aí, tudo certo? Adoro conhecer gente nova e você me parece incrível.",
-        "Oi, tudo bem? Curti seu estilo, vamos trocar umas ideias?"
+        "Oi, tudo bem? Curti seu estilo, vamos trocar umas ideias?",
+        "Eii,Tudo tranquilo por ai? eu simplemsmte amei seu perfil!!,vi até algumas coisas que me deixaram bem curioso! kkk",
     ];
 
     // Função para esperar a página carregar
@@ -178,7 +179,7 @@ const __dirname = path.dirname(__filename);
 
             const promptPayload = {
                 prompt: {
-                    context: 'Você se chama Bruno, um homem de 30 anos, etc...',
+                    context: 'Finja que você é um homem e esta conversando com mulheres no Tinder. Tente ser o mais natural possível,flerte levemente e seja educado,tente sempre render os assuntos e ser o mais interessante possível.',
                     messages: promptMessages
                 }
             };

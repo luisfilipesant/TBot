@@ -1,3 +1,2 @@
-2025/01/08-16:19:22.531 21a8 Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Sync Data\LevelDB/MANIFEST-000001
-2025/01/08-16:19:22.531 21a8 Recovering log #3
-2025/01/08-16:19:22.532 21a8 Reusing old log C:\Users\Jennifer\Desktop\botT\user_data\Default\Sync Data\LevelDB/000003.log 
+2025/01/10-09:55:13.111 177c Creating DB C:\Users\Jennifer\Desktop\botT\user_data\Default\Sync Data\LevelDB since it was missing.
+2025/01/10-09:55:13.291 177c Reusing MANIFEST C:\Users\Jennifer\Desktop\botT\user_data\Default\Sync Data\LevelDB/MANIFEST-000001
